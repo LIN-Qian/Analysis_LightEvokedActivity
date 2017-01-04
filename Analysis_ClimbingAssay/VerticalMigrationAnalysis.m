@@ -1,6 +1,12 @@
-% This code use a toolbox to conduct Mann-Whitney-U Test:
+% This code uses a toolbox to conduct Mann-Whitney-U Test:
 % The linnk is here:  https://www.mathworks.com/matlabcentral/fileexchange/25830-mwwtest-x1-x2-
 
+% This code uses two toolbox for data visualization:
+% 1) stdshade -- https://www.mathworks.com/matlabcentral/fileexchange/29534-stdshade
+% 2) notboxplot -- https://www.mathworks.com/matlabcentral/fileexchange/26508-notboxplot
+
+% This code sometimes uses a toolbox for Correlation Matrix Equality Test (not included in the code):
+% The linnk is here:  https://www.mathworks.com/matlabcentral/fileexchange/15171-jennrich-test
 
 %% load the data:
 % - Input:
@@ -49,6 +55,7 @@ figure
 hold on
 CIshade(-mean_ctrl'/pix_per_cm,0.5,'black')
 CIshade(-mean_expt'/pix_per_cm,0.5,'red')
+% CIshade is modified from stdshade, by replacing std with 95% confidence interval: https://www.mathworks.com/matlabcentral/fileexchange/29534-stdshade
 
 x1  = [1,60];
 x2 = [60,120];
@@ -80,7 +87,8 @@ tmp2 = tmp2(t,:) - tmp2(1,:);
 tmp2 = -tmp2(:)/pix_per_cm/t;
 
 boxplot([tmp1;tmp2],[ones(length(tmp1),1); 2* ones(length(tmp2),1)]);
-
+% alternatively, notboxplot was used: https://www.mathworks.com/matlabcentral/fileexchange/26508-notboxplot
+        
 ylim([-0.1,0.3]);set(gca,'YTick',[-0.1,0,0.1,0.2,0.3 ]);
 xlim([0.5,2.5]);grid on;box on;
 axis square;
@@ -100,6 +108,7 @@ tmp2 = tmp2(t,:) - tmp2(1,:);
 tmp2 = -tmp2(:)/pix_per_cm/t;
 
 boxplot([tmp1;tmp2],[ones(length(tmp1),1); 2* ones(length(tmp2),1)]);
+% alternatively, notboxplot was used: https://www.mathworks.com/matlabcentral/fileexchange/26508-notboxplot
 
 ylim([-0.3,0.1]);set(gca,'YTick',[-0.3,-0.2,-0.1,0,0.1]);
 xlim([0.5,2.5]);
